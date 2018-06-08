@@ -1,22 +1,14 @@
 
 ##########################################################################
 ##                         AUTO-GENERATED FILE                          ##
-##               BUILD_NUMBER=Thu Jun  7 16:25:07 +07 2018              ##
+##               BUILD_NUMBER=Thu 14 Jun 2018 14:14:20 +07              ##
 ##########################################################################
 
 FROM postgres:9.6
 
 RUN apt-get update --fix-missing && \
     apt-get install -y postgresql-server-dev-$PG_MAJOR wget openssh-server barman-cli
-
-#RUN apt-get install -y postgresql-$PG_MAJOR-repmgr=4.0\*
-
-RUN TEMP_DEB="$(mktemp)" && \
-    wget -O "$TEMP_DEB" "https://repmgr.org/download/packages/dev-snapshot-2018-06-06/deb/pool/main/r/repmgr/repmgr-common_4.0.5~git256.g63bdc19-1.stretch+1_all.deb" && \
-    dpkg -i "$TEMP_DEB" && rm -f "$TEMP_DEB" && \
-    wget -O "$TEMP_DEB" "https://repmgr.org/download/packages/dev-snapshot-2018-06-06/deb/pool/main/r/repmgr/postgresql-$PG_MAJOR-repmgr_4.0.5~git256.g63bdc19-1.stretch+1_amd64.deb" && \
-    (dpkg -i "$TEMP_DEB" || apt-get install -y -f) && rm -f "$TEMP_DEB"
-
+RUN apt-get install -y postgresql-$PG_MAJOR-repmgr=4.0.6\*
 
 # Inherited variables
 # ENV POSTGRES_PASSWORD monkey_pass
